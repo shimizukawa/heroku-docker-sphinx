@@ -9,10 +9,8 @@ ADD ./requirements.txt /app/requirements.txt
 WORKDIR /app
 RUN pip install -r requirements.txt
 
-ADD ./doc/ /doc
-RUN sphinx-build -M html /doc $BUILD_PATH
-
-ADD ./main.py /app
+ADD . /app
+RUN sphinx-build -M html /app/doc $BUILD_PATH
 
 CMD gunicorn \
     --bind 0.0.0.0:$PORT \
